@@ -16,11 +16,9 @@ There have been several studies on classifying intent in tweets, but in many cas
 
 \subsection{Choosing questions to be asked for the study}
 
-While the definitions described earlier are a promising start, we were looking for a way to model the function in the sense of why the user chose to share the article with the particular text written in the tweet. The closest description found was in {sinclair1996preliminary}, who describe this as 'communicative intent' describing the types as information, discussion, recommendation, recreation, religion and instruction with further subcategories. There are also the traditional summary classifications such as evaluative vs descriptive and informative, indicative and critival. 
+While the definitions described earlier are a promising start, we were looking for a way to model the function in the sense of why the user chose to share the article with the particular text written in the tweet. The closest description found was in {sinclair1996preliminary}, who describe this as 'communicative intent' describing the types as information, discussion, recommendation, recreation, religion and instruction with further subcategories. There are also the traditional summary classifications such as evaluative vs descriptive and informative, indicative and critical. 
 
 The first attempt at tagging the dataset were made using the following scheme: a sample set of 100 articles were tagged by two people. The tags used in the preliminary tagging were : 'evaluative' vs 'descriptive'. 'Evaluative' text is a more opinionated text, that is more subjective. This text would be expected to take a certain object or event, analyze it,  and form an opinion about it. 'Descriptive' text is non-evaluative, containing for example a narration of an event or an explanation about a certain object or event. A 'mixed' category was also added to accommodate some in-between articles. The tagging was done based on the title, article text and tweet. It was observed that this classification was rather subjective, especially between the evaluative/descriptive/mixed tags. Consequently, the Cohen's kappa value for correlation turned out to be 0.13, confirming the futility of these tags. \cite{liu2012survey} give a detailed analysis about classifying evaluative vs descriptive texts, the task is named as subjectivity classification. They point out that it is a bad idea to classify on a sentence level in complex sentences, since a sentence and by extension a text might be factual as well as evaluative, which was the original problem while tagging. These tagging schemes did not yield much success in terms of gleaning information over the entire dataset.
-
-%‘Traditional’ texts are the ones published by established news houses and a more formal form of discourse. ‘Nontraditional’ texts are a more colloquial and informal way of writing text - longer, with less fact verification and a more explanatory and narrative feel to it. These also include shorter web articles that are somewhere between a blog post and a news article. They are not as free of rules as a blog post, but are not in the style of a rigid news article. However, it was found that there was high correlation between the taggers for traditional vs. nontraditional texts with a kappa value of 0.88. This suggests that this is a possible axis for classification for the articles. 
 
 The type of articles being referenced, and the possible reasons these might be shared gave the list of the possible functions. Using these and earlier studies, we enumerated the relevant functions of tweets for our data : promote a product or an article, agree or disagree with an event, or express an opinion about it. Identifying these functions would ideally help provide parameters for generating tweets. These idea behind these functions have been discussed in the following paragraphs. 
 
@@ -36,7 +34,7 @@ And thirdly, it could be a tweet that singles out a particular piece of informat
 
 Example : "Winter approaching, ways to stay safe from flu season: {url}"
 
-The final questions derived from these functions are shown in \tabref{tab:mturkqs}. A third question of whether the tweet expressed an emotion towards the article, and if so, whether it was a positive or negative emotion was asked too for the pupose of data collection. 
+The final questions derived from these functions are shown in \tabref{tab:mturkqs}. A third question of whether the tweet expressed an emotion towards the article, and if so, whether it was a positive or negative emotion was asked too for the purpose of data collection. 
 
 \begin{table}[!htbp]
 \centering
@@ -49,9 +47,6 @@ Question 2 & Does the tweet contain some information from the article, or summar
 \end{tabular}
 \end{table} 
 
-%Some of these come to mind by thinking about the kind of articles being referenced. 'Articles' up to this point (especially in the implementation and analysis chapters) has been used as a generic term for a web page and the data extracted from it. However, based on the data extracted from the tweets directly, the 'articles' could be newspaper articles, blog posts, opinion pieces and so on. Given that these are the kind of articles being referenced, we can now think about the kind of tweets that might be written about them.
-
-
 \section{Running User Study on Amazon Mechanical Turk}
 
 Amazon Mechanical Turk is a crowdsourcing platform that enables researchers to put up huge samples of data along with surveys, quizzes, and simple tasks to be solved by people over the world.
@@ -60,7 +55,7 @@ Amazon Mechanical Turk is a crowdsourcing platform that enables researchers to p
 
  Four pilot studies were conducted on 100 randomly selected tweet and article pairs, using each to improve the questions. Three separate opinions from people were gathered for each tweet and article pair and the agreement calculated using Fleiss' kappa measure of agreement between the raters. These pilot studies paved the way towards understanding how the data was being analyzed by outsiders. 
  
- After the four initial pilot studies, a decision was taken to present the questions separately in two different studies. This would garuntee an unbiased opinion about that particular question without any assumptions of either/or questions.
+ After the four initial pilot studies, a decision was taken to present the questions separately in two different studies. This would guarantee an unbiased opinion about that particular question without any assumptions of either/or questions.
 
 \subsection{Qualification details}
 
@@ -119,7 +114,7 @@ Mechanical Turk assigns qualifications to workers based on their skill level in 
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.9\textwidth, height=9cm]{results}
-\caption[match]{}
+\caption[Results from user study]{Visualization for tags from human evaluators}
 \label{fig:res}
 \end{figure}
 
@@ -269,18 +264,17 @@ Group 1: 0 or 1 'yes' votes \newline Group 2: 2 or 3 'yes' votes & 217196.5     
 The p-values for \tabref{tab:unicorr1}, \tabref{tab:bicorr1} and \tabref{tab:lcscorr1} show non-significant results for both sets of groups for the first question, the indicativesness of the tweet. The U statistic for each case is very high and the results show a $p>0.5$. We thus fail to reject the null hypothesis, that the two sets were pulled from the same distribution. For all these cases, the means of the two groups are very close to the means for the respective analyis, and to each other. Mean for Unigram match is 29.53\%, mean for bigram match is 10.73\% and the mean for LCS match is 44.6\% as seen in \chapref{chap:analysis}. 
 %The U statistic for each case is very high and the results show a $p>0.5$. We thus fail to reject the null hypothesis, that the two sets were pulled from the same distribution. The means of the LCS values, indicating the extractiveness of the tweet, are very close to each other. 
 
-The p-values for unigram and bigram match for the second question, indicating the informativeness of the summary, shown in \tabref{tab:unicorr2} and \tabref{tab:bicorr2} are both significant, with $p<0.5$, especially so for the first arrangement of groups where group 1 is zero 'yes' votes and group 2 is three 'yes' votes. Based on the result of the p-values, we can conclude that these samples are drawn from different populations. If we look at the means of the values in each case, they are sufficiently different, with the mean of the first group being significantly smaller the mean of the values in the second group. \tabref{tab:lcscorr2} also shows a slight difference in the study that asked for the informativeness of the tweet in the zero vs three 'yes' votes out of three were considered as the sample set configuration. The U-statistic and p-value are both the least in this case. However, no significant result can be drawn from this since p-value is still quite high. 
+The p-values for unigram and bigram match for the second question, indicating the informativeness of the summary, shown in \tabref{tab:unicorr2} and \tabref{tab:bicorr2} are both significant, with $p<0.5$, especially so for the first arrangement of groups where group 1 is zero 'yes' votes and group 2 is three 'yes' votes. Based on the result of the p-values, we can conclude that these samples are drawn from different populations. If we look at the means of the values in each case, they are sufficiently different, with the mean of the first group being significantly smaller the mean of the values in the second group. \tabref{tab:lcscorr2} also shows a slight difference in the study that asked for the informativeness of the tweet in the zero vs three 'yes' votes out of three were considered as the sample set configuration. The U-statistic and p-value are both the least in this case, for longest common subsequence results. However, no significant result can be drawn from this since p-value is still quite high. It is possible that the non-significant result can be explained by the fact that the LCS is a lot more flexible for accommodating words from the overall article, and thus while the means of the two groups show difference in the right direction, the p-value is still high to conclude anything significant. 
 
 
 The results for the questions whether the tweet has an emotion about the article or not are also included. The Fleiss' kappa for agreement was 0.174. The emotion described here is a positive or negative about the text in the article, not about the subject of the article. These were included in the dataset, but were 
  
-%It is also important to note that barring a couple of cases, the average here is a little over 44 for each sample set. The average of mean LCS match percentages for all the tweet article pairs is 44.6 as seen in \chapref{chap:analysis}, giving further evidence that the two sets truly have a distribution spanning the entire range of the match percentages, and tend to have a similar mean even when separated by degree of indicativeness or informativeness of the tweet as judged by the human evaluators.
 
 \subsection{Conclusions from the User Study}
 
-While the study did not show desirable results with earlier analyses performed in this thesis, it still shows a promising direction for further studies in function of tweets. In fact, an important result of this section is the generation of a human-tagged dataset of tweet and article pairs, based on the indicativeness and informativeness of the tweets, as well as tagged with emotwith respect to the article text. 
-
 The significant results from \tabref{tab:unicorr2} and \tabref{tab:bicorr2} confirm that when the tweet is not informative, extractiveness is a wrong direction to pursue. However, we do have inconclusive evidence about whether or not extractiveness of the summary(tweet) overlaps with indicativeness the tweets. Further studies would be required to come to a conclusion about this type of summary classification based on function, and how it interacts with extractiveness of the summary. 
+
+While the study did not show desirable results with earlier analyses performed in this thesis, it still shows a promising direction for further studies in function of tweets. In fact, an important result of this section is the generation of a human-tagged dataset of tweet and article pairs, based on the indicativeness and informativeness of the tweets, as well as tagged with emotion of the tweet with respect to the article text. 
 
 The question about whether a tweet summarizes the content of the article gave mostly positive answers, in contradiction with the earlier results of the degree of extraction from the article. This reinforces the earlier assumption that tweet generation must be done using a more sophisticated tool that summarizes the contents of the article.
 
