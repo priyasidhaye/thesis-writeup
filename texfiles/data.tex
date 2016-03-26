@@ -1,0 +1,52 @@
+\chapter{Data Extraction and Preprocessing}
+\label{chap:data}
+
+This chapter discusses the collection of data for the thesis. The choice twitter for data extraction is discussed, along with the methods used for extracting the data. Then, the preprocessing done on the data is described. 
+
+
+\section{Using Twitter for Data Extraction}
+
+As mentioned earlier, there have been numerous studies that used data from the public Twitter feeds. However, none of the datasets in those studies focused on tweets and related articles linked to these tweets. The dataset of \cite{lloret2013towards} is an exception, as it contains tweets and the news articles they link to, but it only contains 200 English tweet-article pairs. \cite{wei2014utilizing} also constructed a dataset that contains both tweets and articles linked through them, but this data only deals with news text, and does not contain the variety of topics we wanted in the data. We therefore chose to build our own dataset. This section describes extraction, cleaning and other preprocessing of the data.
+
+\section{Extracting Data}
+
+Data was extracted from Twitter using the Twitter REST API using 51 search terms, or ‘hashtags’. These hashtags were chosen from a range of topics including pop culture,  international summit meetings discussing political issues, lawsuits and trials, social issues and health care issues. All these hashtags were ‘trending’ (being tweeted about at a high rate) at the time of extraction of the data. To get a broader sample, the data was extracted over the course of 15 days in November, 2014, which gave us multiple news stories to choose from for the search terms. The search terms were chosen so that there would be broad representation in terms of various stylistic properties of text like formality, subjectivity, etc. For example, searches related to politics would be more formal, while those related to films would be informal, and would also have a lot more opinion pieces about them. A few examples of the search terms and their distribution in genre are shown in \tabref{tab:searchterms}.
+
+We extracted about 30,000 tweets, of which more than half, or around 16,000, contained URLs to an external news article, photo on photo sharing sites, or video. The hashtags were chosen to maximise the number of articles related to the tweets. Many topics that were chosen were being tweeted about by news agencies and other popular news sources.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\multicolumn{1}{|c|}{Politics}                                                       & \multicolumn{1}{c|}{Science \& Technology}                                               \\ \hline
+\begin{tabular}[c]{@{}l@{}}\#apec2014\\ \#G20\\ \#oscarpistorius \\ \end{tabular}        & \begin{tabular}[c]{@{}l@{}}\#rosetta\\ \#lollipop\\ \#mangalayan\end{tabular}            \\ \hline
+\multicolumn{1}{|c|}{Events}                                                         & \multicolumn{1}{c|}{Films and Pop culture}                                               \\ \hline
+\begin{tabular}[c]{@{}l@{}}\#haiyan\\ \#memorialday\\ \#ottawashootings\end{tabular} & \begin{tabular}[c]{@{}l@{}}\#TaylorSwift\\ \#theforceawakens\\ \#johnoliver\end{tabular} \\ \hline
+\multicolumn{1}{|c|}{International}                                                  & \multicolumn{1}{c|}{Sports}                                                              \\ \hline
+\begin{tabular}[c]{@{}l@{}}\#berlinwall\\ \#ebola\\ \#erdogan\end{tabular}           & \begin{tabular}[c]{@{}l@{}}\#ausvssa\\ \#playingitmyway\\ \#nycmarathon\end{tabular}     \\ \hline
+\end{tabular}
+% \bigskip
+\captionof{table}{Examples of the hashtags used for extraction, grouped into various categories.}
+\label{tab:searchterms}
+\end{table}
+
+The data from the tweets was cleaned by removing the tweets that were not in English as well as the retweets; i.e., re-publications of a tweet by a different user.
+
+We deduplicated the 16,000 extracted URLs into 6,003 unique addressed, then extracted and preprocessed their contents. The \texttt{newspaper} package\footnote{https://pypi.python.org/pypi/newspaper} was used to extract article text and the title from the web page. Since we are interested in text articles that can serve as the source text for summarization algorithms, we needed to remove photos and video links such as those from Instagram and YouTube. To do so, we removed those links that contained fewer than a threshold of 150 words. After this preprocessing, the number of useful articles was reduced from 6003 to 3066. There were some further tweet-article pairs where the text of the tweets was identical, these were removed by further preprocessing and the number of unique tweet-article pairs came down to 2471. 
+
+The final version of the data consists of tweets along with other information about the tweet, such as links to articles, hashtags, time of publication, etc. We also retain the linked article text and preprocessed it using the CoreNLP toolkit \cite{manning2014stanford}. This includes the URL itself and the text extracted from the article, as well as some extracted information such as sentence boundaries, POS tags for tokens, parse trees and dependency trees. These annotations are used later during our analysis in \chapref{chap:analysis}. \tabref{tab:ex1} shows an example of an entry in the dataset.
+
+A URL could have been tweeted through multiple tweets, all the ids of these tweets are linked to the same URL. It should be noted that the tweet to article dataset contains only the articles that are significantly long texts about the subject with a title, and contain no advertisements, other languages, or links to images or videos. 
+
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|p{0.1\linewidth}|p{0.8\linewidth}|}
+\hline
+Tweet & `\#RiggsReport: \#CA as the \#ElectionNight exception. Voters rewarded \#GOP nationally, but not in the \#GoldenState. http://t.co/K542wvSNVz' \\ \hline
+Title & `The Riggs Report: California as the Election Night exception'                                                                                 \\ \hline
+Text  & `When the dust settled on Election Night last week...'                                                                                         \\ \hline
+\end{tabular}
+\captionof{table}{Example of a tweet, title of the article and the text.}
+\label{tab:ex1}
+\end{table}
