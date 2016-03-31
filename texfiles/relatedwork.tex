@@ -1,12 +1,12 @@
 \chapter{Background and Related Work}
 \label{chap:background}
 
-This chapter contains the literature survey and the background for the thesis. Background on various concepts used in the thesis along with numerous related studies, especially on Twitter data are then discussed.
+This chapter contains a survey of various concepts used in the thesis such as types of summarization and its evaluation, as well as numerous related studies based on Twitter data and studies with the goal of generating tweets.
 
 
 \section{Summarization}
 
-Summarization is the task of condensing the original text document while retaining as much of the important information as possible. Other goals include readability of the generated summary and coherence. The two main approaches for automatic text summarization are \textit{extractive} and \textit{abstractive} summarization. Extractive summarization uses the technique of extract and rearrange. \cite{nenkova2012survey} describe the components in extractive summarization techniques as building an internal representation of the important parts of the text, ranking these in the order of importance/time etc and then selecting a suitable list of these sentences to eventually form the summary. In phrase-level summarization, smoothing techniques may be used to generate readable texts. Sentence-level summarization techniques tend do be inherently more cohesive since sentences are directly picked out, however, sentence compression techniques can be used to reduce the size of the summaries. Even after using smoothing techniques to generate readable text, the summaries tend to be incoherent and hard to read. \figref{fig:extractive} shows an example of extractive summarization where a couple of sentences from the article have been picked to show in the the thumbnail for an article.
+Summarization is the task of condensing the original text document while retaining as much of the important information as possible. Other goals include readability of the generated summary and coherence. The two main approaches for automatic text summarization are \textit{extractive} and \textit{abstractive} summarization. Extractive summarization uses the technique of extract and rearrange. \cite{nenkova2012survey} describe the components in extractive summarization techniques as building an internal representation of the important parts of the text, ranking these in the order of importance/time etc and then selecting a suitable list of these sentences to eventually form the summary. In phrase-level summarization, smoothing techniques may be used to generate readable texts. In contrast to phrase-level summarization, sentence-level summarization techniques tend do be inherently more grammatically correct since sentences are directly picked out. However, sentence compression techniques can also be used to reduce the size of the summaries. Even after using smoothing techniques to generate readable text, the summaries tend to be incoherent and hard to read. \figref{fig:extractive} shows an example of extractive summarization where a couple of sentences from the article have been picked to show in the the thumbnail for an article.
 
 \begin{figure}[!htbp]
 \centering
@@ -16,7 +16,7 @@ Summarization is the task of condensing the original text document while retaini
 \end{figure}
 
 
-The second approach is that of abstractive summarization. This is a text-to-text generation approach that aims at keeping the content or meaning of the text the same while condensing the text or generalizing it. As a rule, abstractive summarization requires world knowledge and is a much more difficult problem to solve. In fact, it is a rather large challenge and current summarization techniques concentrate on improving results from extractive summarization. \figref{fig:abstractive} shows the same thumbnail for a news article. However, the title of the article is an abstractive summary that is a generalization of the events described, carefully omitting details yet leaving the overall meaning of the event untouched.
+The second approach is that of abstractive summarization. This is a summarization approach that aims at keeping the content or meaning of the input source the same while condensing the text or generalizing it and involves text generation for generating the summary. As a rule, abstractive summarization requires world knowledge and is a much more difficult problem to solve. In fact, it is a rather large challenge and current summarization techniques concentrate on improving results from extractive summarization. \figref{fig:abstractive} shows the same thumbnail for a news article. However, the title of the article is an abstractive summary that is a generalization of the events described, carefully omitting details yet leaving the overall meaning of the event untouched.
 
 \begin{figure}[!htbp]
 \centering
@@ -35,9 +35,9 @@ ROUGE is an evaluation measure popularly used for evaluating quality of summarie
 ROUGE-N = \frac{\sum\limits_{S \in \{Reference Summaries\}} \sum\limits_{gram_n \in S} Count_{match}(gram_n)}{\sum\limits_{S \in \{Reference Summaries\}} \sum\limits_{gram_n \in S} Count(gram_n)}
 \end{equation}
 
-The equation as described by \cite{lin2004looking} shows the calculation of the ROUGE-N score, where $n$ is the length of the n-gram, and $Count_{match}$ is the length of the matched n-grams in the summary and the reference summaries.
+The equation as described by \cite{lin2004looking} shows the calculation of the ROUGE-N score, where $n$ is the length of the n-gram, and $Count_{match}$ is the count of the matched n-grams in the summary and the reference summaries.
 
-The use of multiple gold standard summaries gives rise to a subjective evaluation metric where the quality of the evaluation is dependent on the quality and number of the gold standard summaries. ROUGE also does not calculate take into account whether the summary is fluent or coherent. However, it is useful in the extractive text summarization systems where content retention needs to be judged since it uses n-gram co-occurrence statistics.
+The use of multiple gold standard summaries gives rise to a subjective evaluation metric where the quality of the evaluation is dependent on the quality and number of the gold standard summaries. ROUGE also does not take into account whether the summary is fluent or coherent. However, it is useful in the extractive text summarization systems where content retention needs to be judged since it uses n-gram co-occurrence statistics.
 
 % \section{Stylistics}
 %\change{remove this and put it in the formality part}
@@ -45,7 +45,7 @@ The use of multiple gold standard summaries gives rise to a subjective evaluatio
 
 \section{Studies based on Twitter data}
 
-There have been studies on a number of different issues related to Twitter data, including classifying tweets and sentiment analysis of tweets. \cite{ghosh2011entropy} classified the retweeting activity of users based on time intervals between retweets of a single user and frequency of retweets from unique users. 'Retweet' here means the occurrence of the same URL in a different tweet. The study was able to classify the retweeting as automatic or robotic retweeting, campaigns, news, blogs and so on, based on the time-interval and user-frequency distributions. In another study, \cite{chen2012extracting} were able to extract sentiment expressions from a corpus of tweets including both formal words and informal slang that bear sentiment.
+There have been studies on a number of different issues related to Twitter data, including classifying tweets and sentiment analysis of tweets. \cite{ghosh2011entropy} classified the retweeting activity of users based on time intervals between retweets of a single user and frequency of retweets from unique users. `Retweet' here means the occurrence of the same URL in a different tweet. The study was able to classify the retweeting as automatic or robotic retweeting, campaigns, news, blogs and so on, based on the time-interval and user-frequency distributions. In another study, \cite{chen2012extracting} were able to extract sentiment expressions from a corpus of tweets including both formal words and informal slang that bear sentiment.
 
 Other studies using Twitter data include \cite{o2010tweetmotif}, who use topic summarization for a given search for better browsing. \cite{chakrabarti2011event} generate an event summary by learning about the event using a Hidden Markov Model over the tweets describing it. \cite{wang2014socially} generate a coherent event summary by treating summarization as an optimization problem for topic cohesion. \cite{inouye2011comparing} compare multiple summarization techniques to generate a summary of multi-post blogs on Twitter. \cite{wei2014utilizing} use tweets to help in generating better summaries of news articles.
 
