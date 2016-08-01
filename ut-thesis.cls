@@ -287,6 +287,8 @@
   {\ifx\empty#1\empty\else\gdef\@author{#1}\fi}
 \renewcommand*{\title}[1]%
   {\ifx\empty#1\empty\else\gdef\@title{#1}\fi}
+\newcommand*{\frenchtitle}[1]%
+  {\ifx\empty#1\empty\else\gdef\@frenchtitle{#1}\fi}
 
 %% Default values for the required fields.
 \degree{\emph{(degree)}}
@@ -307,21 +309,27 @@
 %% Change \maketitle to follow SGS guidelines.
 \renewcommand*{\maketitle}%
   {\begin{titlepage}
-   \large\singlespacingnoskip
+%    \large
+   \singlespacingnoskip
+   
+      \mbox{}\vspace{38mm}   
    \begin{center}
-      \mbox{}
+      {\large\uppercase\expandafter{\@title}}\\[5mm]
+%       \vfill
+	{{
+    \normalsize
+     \textit{{ by \\
+      \@author}}\\[5mm]
+      \bigskip
+      School of {\@department}\\
+      McGill University, Montr\'{e}al\\
+      2016 \\
+      }}
       \vfill
-      \textsc{\@title}\\
       \vfill
-      by \\
-      \vfill
-      {\@author}\\
-      \vfill
-      \vfill
-      A thesis submitted in conformity with the requirements\\
-      for the degree of {\@degree}\\
-      Graduate Department of {\@department}\\
-      McGill University\\
+      {
+      \small\sc A thesis submitted to the Faculty of Graduate Studies and Research  \\ in partial fulfillment of the requirements for the degree of\\ {\@degree}\\
+      }
       \vfill
       {\copyright} Copyright {\@gradyear} by {\@author}\\
       \vspace{.01\textheight}
@@ -334,16 +342,35 @@
 %% Change \begin{abstract}...\end{abstract} to follow SGS guidelines.
 \renewenvironment*{abstract}%
   {\begin{center}
-      \section*{Abstract}
+      \chapter*{Abstract}
    \end{center}
-   \begin{center}
-      {\@title}\\[2ex]
-      {\@author}\\
-      {\@degree}\\
-      Graduate Department of {\@department}\\
-      McGill University\\
-      {\@gradyear}\\
+%    \begin{center}
+%       {\@title}\\[2ex]
+%       {\@author}\\
+%       {\@degree}\\
+%       School of {\@department}\\
+%       McGill University\\
+%       {\@gradyear}\\
+%    \end{center}
+   \begingroup
+   %% Adjust line spacing: if it was less than 2, increase it to 2;
+   %% otherwise, leave it as is.
+   \ifdim \baselinestretch pt < 1.6pt \doublespacing\fi}%
+  {\par\endgroup\newpage}
+  
+%% Change \begin{abstract}...\end{abstract} to follow SGS guidelines.
+\newenvironment*{frenchabstract}%
+  {\begin{center}
+      \chapter*{R\'{e}sum\'{e}}
    \end{center}
+%    \begin{center}
+%       {\@frenchtitle}\\[2ex]
+%       {\@author}\\
+%       {\@degree}\\
+%       School of {\@department}\\
+%       McGill University\\
+%       {\@gradyear}\\
+%    \end{center}
    \begingroup
    %% Adjust line spacing: if it was less than 2, increase it to 2;
    %% otherwise, leave it as is.

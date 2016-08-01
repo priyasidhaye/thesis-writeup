@@ -74,6 +74,10 @@
 \usepackage{lipsum}                    
 \usepackage{xargs}                     
 \usepackage{graphicx}
+\usepackage{paralist}
+\usepackage[capitalise]{cleveref}
+% \usepackage[utf8]{inputenc}
+% \usepackage[T1]{fontenc}
 \graphicspath{ {images/} }
 \usepackage[pdftex,dvipsnames]{xcolor} 
 \usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
@@ -120,6 +124,7 @@
 \gradyear{2016}
 \author{Priya Sidhaye}
 \title{Examining Indicative Tweet Generation As An Extractive Summarization Problem}
+\frenchtitle{temp}
 
 %% *** NOTE ***
 %% Put here all other formatting commands that belong in the preamble.
@@ -160,17 +165,25 @@
 \begin{abstract}
 %% *** Put your Abstract here. ***
 %% (At most 150 words for M.Sc. or 350 words for Ph.D.)
-Social media such as Twitter have become an important method of communication, with potential opportunities for NLG to facilitate the generation of social media content. We focus on the generation of \emph{indicative tweets} that contain a link to an external web page. While it is natural and tempting to view the linked web page as the source text from which the tweet is generated in an extractive summarization setting, it is unclear to what extent actual indicative tweets behave like extractive summaries. We collect a corpus of indicative tweets with their associated articles and investigate to what extent they can be derived from the articles using extractive methods. We also consider the impact of the formality and genre of the article.
 
-With the aim of finding the possible factors that influence the probability of the tweet being a summarization of the article, we conduct further studies to detect the function of the tweet. The results that are significant show a positive correlation between the extractiveness and informativeness of the tweet. In the analysis of these questions, we have also generated a dataset of various tweets categorized by their subjects and  spanning broad areas of public interest, along with text in newspaper articles linked to by these tweets. The judgments provided by the human evaluators in our user study are also added to the data to make a human-tagged dataset for identifying functions of tweets.
+Social media such as Twitter have become an important method of communication, with potential opportunities for Natural Language Generation (NLG) to facilitate the generation of social media content. The presence of the URL in the short tweet is a strong signal that the tweet is functioning to help Twitter users decide whether to read the full article. We focus on the generation of these \emph{indicative tweets}, which we define as tweets containing links to external web pages. Extractive summarization is the process of generating a summary of the text by choosing a subset of words from the text. Previous work in automatic tweet generation has viewed the linked web page as the source text from which the tweet is generated in an extractive summarization setting. However, this setting may not be appropriate, because it is unclear to what extent indicative tweets actually behave like extractive summaries.
 
-Our results demonstrate the limits of viewing indicative tweet generation as extractive summarization, and point to the need for the development of a methodology for tweet generation that is sensitive to genre-specific issues.
+We collect a corpus of indicative tweets with their associated articles and investigate the extent to which they can be derived from the articles using extractive methods. We also consider the impact of the formality and genre of the article. We conduct further studies to detect the \textit{function} of the tweet, i.e., the reason the user shared the tweet. In particular, with the aim of finding possible factors that influence the composition of the tweet, we considered whether the tweet is an advertisement or summary of the article. We find a significant positive correlation between the degree of extraction and the degree to which a tweet behaves like a summary. 
+
+Our results demonstrate the limits of viewing indicative tweet generation as extractive summarization, and point to the need for the development of methods for tweet generation that are not based on simple extractive techniques. We also show the need for genre-sensitive methods for generating tweets.
+
+This thesis contributes a novel dataset of indicative tweets labelled by their function as defined above. The tweets are  categorized by their subjects, and span broad areas of public interest.  In terms of theoretical contributions, this thesis clarifies the relationship between an indicative tweet and the article to which it relates and lays the groundwork for developing a system that would be able to generate indicative tweets from referenced documents, possibly based on parameters such as whether the tweet is intended to be an advertisement or a public service announcement.
 
 \end{abstract}
+\begin{frenchabstract}
+Les r\'{e}seaux  sociaux tels que Twitter sont devenus un moyen de communication important, soulignant de plus en plus de possibilit\'{e}s de g\'{e}n\'{e}ration automatique de texte (NLG) pour faciliter la g\'{e}n\'{e}ration des textes qu'on rencontre dans les r\'{e}seaux  sociaux. Nous nous concentrons sur la g\'{e}n\'{e}ration de \textit{tweets indicatifs} qu'on d\'{e}finit comme \'{e}tant des tweets contenant un lien pointant vers de pages web externes. Le r\'{e}sum\'{e} automatique par extraction consiste \`{a} g\'{e}n\'{e}rer un r\'{e}sum\'{e} du texte en s\'{e}lectionnant certains mots de ce texte. Les approches ant\'{e}rieures \`{a} la g\'{e}n\'{e}ration automatique de tweets ont consid\'{e}r\'{e} que la page web li\'{e}e est la source \`{a} partir de laquelle le tweet est g\'{e}n\'{e}r\'{e} dans un cadre de r\'{e}sum\'{e} automatique par extraction. Toutefois, ce cadre-l\`{a} pourrait ne pas \^{e}tre le plus convenable puisqu'il n'est pas assez \'{e}vident dans quelle mesure les tweets indicatifs se comportent comme \'{e}tant des r\'{e}sum\'{e}s par extraction.
 
-\begin{abstract}
-\input{texfiles/frenchabstract}
-\end{abstract}
+Nous collectons un corpus de tweets indicatifs avec leurs articles associ\'{e}s et \'{e}tudions dans quelle mesure ils peuvent être obtenus \`{a} partir des articles en utilisant des m\'{e}thodes de r\'{e}sum\'{e} automatique par extraction. Nous consid\'{e}rons \'{e}galement l'effet de la formalit\'{e} et le genre de l'article. Nous menons des \'{e}tudes pour sp\'{e}cifier et mieux comprendre la \textit{fonction} du tweet, c'est-\`{a}-dire, la raison pour laquelle l'utilisateur a partag\'{e} le tweet. Particuli\`{e}rement, dans le but de trouver les facteurs qui agissent sur la composition du tweet, nous consid\'{e}rons si le tweet est une annonce publique ou un r\'{e}sum\'{e} de l'article. Nous trouvons une corr\'{e}lation positive consid\'{e}rable entre le degr\'{e} d'extraction et le degr\'{e} selon lequel le tweet se comporte comme \'{e}tant un r\'{e}sum\'{e}. Nos r\'{e}sultats d\'{e}montrent les limites de consid\'{e}rer la g\'{e}n\'{e}ration des tweets indicatifs comme \'{e}tant une m\'{e}thode de r\'{e}sum\'{e} automatique par extraction. Ils soulignent \'{e}galement le besoin de d\'{e}velopper de m\'{e}thodes de g\'{e}n\'{e}ration de tweets qui ne sont pas bas\'{e}es sur de simples techniques d'extraction. Nous d\'{e}montrons de m\^{e}me le besoin de m\'{e}thodes de g\'{e}n\'{e}ration de tweets qui sont sensitives au genre.
+
+Cette th\`{e}se pr\'{e}sente un nouvel ensemble de donn\'{e}es de tweets indicatifs que nous avons class\'{e} par leurs fonctions comme d\'{e}finies ci-dessus. Les tweets sont class\'{e}s par leurs sujets et couvrent de grands domaines d'int\'{e}r\^{e}t public. En tant que contribution th\'{e}orique, cette th\`{e}se clarifie la relation entre un tweet indicatif et l'article correspondant et pr\'{e}sente un plan pour le d\'{e}veloppement d'un syst\`{e}me qui pourrait g\'{e}n\'{e}rer des tweets indicatifs \`{a} partir de documents r\'{e}f\'{e}renc\'{e}s, en se basant sur de param\`{e}tres qui peuvent, par exemple, consid\'{e}rer si le tweet fonctionne comme une publicit\'{e} ou un message d'int\'{e}r\^{e}t public.
+
+
+\end{frenchabstract}
 
 \input{texfiles/ack}
 
